@@ -77,12 +77,69 @@ public class Polynomial {
 	public double evaluate(double x) {
         	double result = 0;
         	for (int i = 0; i < coefficient.length; i++) {
-            		result += coefficient[i] * Math.pow(x,exponent[i]);
+            		result += coefficient[i] * Math.pow(x, exponent[i]);
         	}
         	return result;
     	}
 	public boolean hasRoot(double x) {
         	return evaluate(x) == 0;
-	}	
+	}
+
+	public Polynomial multiply(Polynomial y) {
+		int maxLength = coefficients.length * y.coefficients.length;  // Max possible number of terms
+		double[] productCoefficients = new double[maxLength];
+		int[] productExponents = new int[maxLength];
+		int index = 0;
+
+	        // Multiply every term in the current polynomial by every term in the other polynomial
+	        for (int i = 0; i < coefficients.length; i++) {
+	            for (int j = 0; j < y.coefficients.length; j++) {
+	                double newCoefficient = coefficients[i] * y.coefficients[j];
+	                int newExponent = exponents[i] + y.exponents[j];
+	
+	                // Check if a term with the same exponent already exists
+	                boolean inList = false;
+	                for (int k = 0; k < index; k++) {
+	                    if (productExponents[k] == newExponent) {
+	                        productCoefficients[k] += newCoefficient;
+	                        inList = true;
+	                        break;
+	                    }
+	                }
+	
+	                // If no such term exists, add the new term
+	                if (!inList) {
+	                    productCoefficients[index] = newCoefficient;
+	                    productExponents[index] = newExponent;
+	                    index++;
+	                }
+	            }
+	        }
+	
+	        // Filter out terms with zero coefficients
+	        int nonZeroCount = 0;
+	        for (int i = 0; i < index; i++) {
+	            if (productCoefficients[i] != 0) {
+	                nonZeroCount++;
+	            }
+	        }
+	
+	        // Create arrays for the result polynomial with only non-zero terms
+	        double[] newCoefficients = new double[nonZeroCount];
+	        int[] newExponents = new int[nonZeroCount];
+	
+	        int newIndex = 0;
+	        for (int i = 0; i < index; i++) {
+	            if (productCoefficients[i] != 0) {
+	                newCoefficients[newIndex] = productCoefficients[i];
+	                newExponents[newIndex] = productExponents[i];
+	                newIndex++;
+	            }
+	        }
+	
+	        // Return the resulting polynomial
+	        return new Polynomial(newCoefficients, newExponents);
+			
+	}
 }
 
