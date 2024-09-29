@@ -1,5 +1,6 @@
 public class Polynomial {
-	double[] coefficient;
+	double[] coefficient; // Array to store non-zero coefficients
+	int[] exponent; // Array to store corresponding exponents
 	
 	public Polynomial() {
 		coefficient = new double[1];
