@@ -48,7 +48,7 @@ public class Polynomial {
 			}
 		}
 		
-		// Filter out any zero coefficients by counting non-zero terms
+		// Remove any zero coefficients by counting non-zero terms
 		int nonZeroCount = 0;
 		for (int i = 0; i < index; i++) {
 			if (sumCoefficients[i] != 0) {
@@ -116,7 +116,7 @@ public class Polynomial {
 	            }
 	        }
 	
-	        // Filter out terms with zero coefficients
+	        // Remove terms with zero coefficients
 	        int nonZeroCount = 0;
 	        for (int i = 0; i < index; i++) {
 	            if (productCoefficients[i] != 0) {
@@ -139,7 +139,6 @@ public class Polynomial {
 	
 	        // Return the resulting polynomial
 	        return new Polynomial(newCoefficients, newExponents);
-			
 	}
 }
 
