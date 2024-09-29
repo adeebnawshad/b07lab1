@@ -3,8 +3,8 @@ public class Polynomial {
 	int[] exponent; // Array to store corresponding exponents
 	
 	public Polynomial() {
-		coefficient = new double[1];
-		coefficient[0] = 0;
+		coefficient = new double[0];  // Empty array for coefficients
+    		exponent = new int[0];        // Empty array for exponents
 	}
 
 	public Polynomial(double[] coefficients) {
